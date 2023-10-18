@@ -1,32 +1,26 @@
 const router = require("express").Router();
-const Todo = require("../models/Todo");
+const Chat = require("../models/Chat");
+const storage = require("node-sessionstorage");
 
-// routes
-router
-    .post("/add/todo", (req, res) => {
-        const { todo } = req.body;
-        const newTodo = new Todo({ todo });
+router.post("/add/todo", (req, res) => {
+    const { todo } = req.body;
+    const newChat = new Chat({ name: storage.getItem("username"), todo: todo });
+    newChat
+        .save()
+        .then(() => {
+            console.log("Success added todo");
+            res.redirect("/chat");
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
 
-        // save the todo
-        newTodo
-            .save()
-            .then(() => {
-                console.log("Successfully added todo!");
-                res.redirect("/");
-            })
-            .catch((err) => console.log(err));
-    })
-    /
-    router.get("/delete/todo/:_id", (req, res) => {
-        const { _id } = req.params;
-        Todo.deleteOne({ _id })
-            .then(() => {
-                console.log("Deleted Todo Successfully!");
-                res.redirect("/");
-            })
-            .catch((err) => console.log(err));
-    });
-
-
+router.post("/add/username", (req, res) => {
+    const { username } = req.body;
+    storage.setItem("username", username);
+    console.log("Username : ", storage.getItem("username"));
+    res.redirect("/chat");
+});
 
 module.exports = router;
