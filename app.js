@@ -4,9 +4,10 @@ const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
 
 const app = express();
-
+const uri =
+  "mongodb+srv://jamisonderilsan1998:drENASawpihZMMYR@cluster0.xmbv4zb.mongodb.net/?retryWrites=true&w=majority"
 // conenction to mongodb
-mongoose.connect("mongodb+srv://franktowa199724:90Ev8hYcEEbws3bS@test.h4dsfi3.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
