@@ -10,6 +10,24 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script>
+      $(function(){
+        $('form').on('submit', function(e){
+          e.preventDefault();
+
+          $.ajax({
+            type: 'post',
+            url: '/add/username',
+            data: $('form').serialize(),
+            success: function(){
+              window.location.href="/chat"
+            }
+          });
+        });
+      });
+    </script>
   </head>
 
   <body class="container">
@@ -18,8 +36,6 @@
       style="height: 100vh"
     >
       <form
-        action="/add/username"
-        method="post"
         class="border"
         style="width: 30vw; padding: 20px"
       >

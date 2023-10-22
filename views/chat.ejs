@@ -1,4 +1,3 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,30 +7,63 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+
 </head>
 
 <body class="container">
-    <div class="w-full border mt-5  relative" style="height: 70vh;position: relative; ">
-        <div class="w-full " style="overflow-y: auto; padding: 10px;">
+
+    <div class="w-full border mt-5  relative" style="height: 90vh;position: relative; ">
+        <div class="p-3 d-flex" style="height: 10vh;font-size: 20px;font-weight: 500;background: #598da5;color: white;">
+            <div class="">
+                <i class="fa fa-user-circle-o" style="font-size: 40px; color:rgb(173, 193, 201)"></i>
+            </div>
+            <p class="" style="margin-left: 10px;">Welcome <%= names %>
+            </p>
+        </div>
+        <div class="w-full " style="overflow-y: auto;height: 70vh; padding: 10px;">
             <% todo.forEach(todos=>{ %>
 
-                <% if(todos.name === names ){ %>
-                    <button class="w-auto h-auto border-0 rounded" style="padding: 5px;margin-top: 10px; background: rgb(60, 141, 137);color: white;width: 50px;float: right;margin-top: 10px;">
-                        <%= todos.todo %>
-                    </button><br><br>
-                  <% } else{ %>  
-                    <button class="w-auto h-auto border-0 rounded" style="padding: 5px;margin-top: 10px; background: rgb(68, 124, 98);color: white;width: 50px;">
-                        <%= todos.todo %>
-                    </button><br>
-                 <% } %>
-                <%})%>
-            </div>
-        <form action="/add/todo" method="POST" class="d-flex"  style="position: absolute;bottom: 0px;width: 100%;padding: 5px;">
+                <% if(todos.name===names ){ %>
+                    <div class="d-flex justify-content-end" >
+                        <div class="">
+                            <i class="fa fa-user-circle-o" style="font-size: 50px; color: rgb(78, 144, 170)"></i>
+                        </div>
+                        <div>
+                            <button class="w-auto h-auto border-0 rounded"
+                                style="padding: 5px;margin-top: 10px;margin-left: 8px; background: rgb(22, 201, 82);color: white;width: 50px;float: right;margin-top: 10px;text-align: left;">
+                                <%= todos.todo %>
+                            </button>
+                            <p style="font-size: 12px; margin-left: 8px;color: rgb(214, 175, 46);">Posted <%= moment(todos.date, "MMMM-Do YYYY, h:mm:ss a").fromNow();  %></p>
+                        </div>
+                    </div>
+                    <br><br>
+
+                    <% } else if(todos.name==`bot-${names}`){ %>
+                        <div class="d-flex">
+                            <div class="">
+                                <i class="fa fa-user-circle-o" style="font-size: 50px; color: rgb(78, 165, 97)"></i>
+                            </div>
+                            <div>
+                                <button class="w-auto h-auto border-0 rounded"
+                                    style="padding: 5px;margin-top: 10px;margin-left: 8px; background: rgb(68, 124, 98);color: white;width: 50px;max-width: 50%;text-align: left;">
+                                    <%= todos.todo %>
+                                </button>
+                                <p style="font-size: 12px; margin-left: 8px;color: rgb(214, 175, 46);">Posted <%= moment(todos.date, "MMMM-Do YYYY, h:mm:ss a").fromNow();  %></p>
+                            </div>
+                        </div>
+                        <br><br>
+                        <% } %>
+                            <%})%>
+        </div>
+        <form action="/add/todo" method="post" class="d-flex"
+            style="position: absolute;bottom: 0px;width: 100%;padding: 5px;">
             <input type="text" placeholder="Type your message here" name="todo" class="form-control w-full">
             <input type="submit" value="Send Message" class="btn btn-info mx-2" />
         </form>
-        </div>
+    </div>
     </div>
     <!-- <div class="border" style="width: 40%;">
         <form action="/add/username" method="post">
@@ -42,7 +74,3 @@
 </body>
 
 </html>
-
- 
-
-

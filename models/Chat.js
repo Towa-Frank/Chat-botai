@@ -9,6 +9,10 @@ const ChatSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    date: {
+        type: String,
+        require: true
+    }
 });
 
 module.exports = new mongoose.model("Chat", ChatSchema);
